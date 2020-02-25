@@ -2,6 +2,7 @@
   "name": "the-story-teller",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://projects.kaltura.com/eitan/stories",
   "dependencies": {
     "kaltura-typescript-client": "file:libs/kaltura-typescript-client-14.3.0-v20180717-150817.tgz",
     "@testing-library/jest-dom": "^4.2.4",
