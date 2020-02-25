@@ -34,32 +34,33 @@
 <div class="recorder" id="recorder">
     <script>
 
-        var queryString = window.location.search;
-        console.log(queryString);
+        const getQueryParams = (params, url) => {
+            let href = url;
+            //this expression is to get the query strings
+            let reg = new RegExp('[?&]' + params + '=([^&#]*)', 'i');
+            let queryString = reg.exec(href);
+            return queryString ? queryString[1] : null;
+        };
 
-        var urlParams = new URLSearchParams(queryString);
 
-
-        var ks = "3jJ8MTcyNjE3MnyNmKdbwP9_RE23-DM7iqReqZ_j_leSEldy1jnqDOFTCliNGx6ELbc2CCdr-ITCAnr_9HXhnjqJGgQ4V6j7upPIdOidc9lg8Pyd176RegFvbbLKdT_zQ4O3gh9BystOIHJbRpTNvGp4lNnHC0ARYS0Q";
+        var ks = "";
         var partnerId = 1726172;
         var playerId = 45121811;
-        var user = "default";
+        var user = "user5";
 
         // params OVERRIDE
-        if (urlParams.user) {
-            user = urlParams.user;
-        }
-        if (urlParams.ks) {
-            ks = urlParams.ks;
+        if (getQueryParams('user', window.location)) {
+            user = getQueryParams('user', window.location);
         }
 
-        if (urlParams.partnerId) {
-            partnerId = urlParams.partnerId;
+        if (getQueryParams('ks', window.location)) {
+            ks = getQueryParams('ks', window.location);
         }
 
-        if (urlParams.playerId) {
-            playerId = urlParams.playerId;
+        if (getQueryParams('partnerId', window.location)) {
+            partnerId = getQueryParams('partnerId', window.location);
         }
+
 
         window.KApps = window.KApps || {};
         window.transportError = function (err) {
@@ -125,7 +126,7 @@
                 setTimeout(function () {
                     // DONE UPLOAD
                     // https://www.kaltura.com/api_v3/service/playlist/action/get?format=1&id=0_iklvfbcq&ks=djJ8MTcyNjE3MnyNmKdbwP9_RE23-DM7iqReqZ_j_leSEldy1jnqDOFTCliNGx6ELbc2CCdr-ITCAnr_9HXhnjqJGgQ4V6j7upPIdOidc9lg8Pyd176RegFvbbLKdT_zQ4O3gh9BystOIHJbRpTNvGp4lNnHC0ARYS0Q 
-                    console.log(">>>> e",e.detail.entryId);
+                    console.log(">>>> e", e.detail.entryId);
                 });
             },
 
@@ -187,7 +188,7 @@
             "playerUrl": "https://cdnapisec.kaltura.com",
             "conversionProfileId": null,
             "partnerId": partnerId,
-            "entryName": "STORY "+user,
+            "entryName": "STORY " + user,
             "uiConfId": playerId,
             "browserNotSupportedText": "Your browser is not supported. Please use a modern browser",
             "maxRecordingTime": "You have reached max allowed recording time",
